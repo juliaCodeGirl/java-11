@@ -1,5 +1,6 @@
 package ru.netology.repository;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.domain.MovieItem;
 import ru.netology.manager.AfishaManager;
@@ -19,6 +20,8 @@ class MovieRepositoryTest {
     MovieItem ninth = new MovieItem(9, 9, "Соник в кино", "приключения", "http://image.com");
     MovieItem tenth = new MovieItem(10, 10, "Дюна", "научная фантастика", "http://image.com");
     MovieItem eleventh = new MovieItem(11, 11, "Лёд", "спорт", "http://image.com");
+
+
 
     @Test
     void shouldSave() {
@@ -52,6 +55,18 @@ class MovieRepositoryTest {
     void shouldFindById() {
         MovieItem expected = new MovieItem(7, 7, "Номер один", "комедия", "http://image.com");
 
+        repository.save(first);
+        repository.save(second);
+        repository.save(third);
+        repository.save(fourth);
+        repository.save(fifth);
+        repository.save(sixth);
+        repository.save(seventh);
+        repository.save(eighth);
+        repository.save(ninth);
+        repository.save(tenth);
+        repository.save(eleventh);
+
         MovieItem actual = repository.findById(7);
 
         assertEquals(expected, actual);
@@ -66,7 +81,7 @@ class MovieRepositoryTest {
 
     @Test
     void shouldRemoveById() {
-        MovieItem[] expected = new MovieItem[] {first ,second, third, fourth, fifth, seventh, eighth, ninth, tenth, eleventh};
+        MovieItem[] expected = new MovieItem[]{first, second, third, fourth, fifth, seventh, eighth, ninth, tenth, eleventh};
 
         repository.save(first);
         repository.save(second);
