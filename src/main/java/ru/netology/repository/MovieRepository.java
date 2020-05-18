@@ -26,6 +26,7 @@ public class MovieRepository {
         }
         return null;
     }
+
     public void removeById(int id) {
         MovieItem[] tmp = new MovieItem[movies.length - 1];
         int i = 0;
@@ -41,6 +42,5 @@ public class MovieRepository {
     public void removeAll() {
         movies = new MovieItem[0];
     }
-
 
 }

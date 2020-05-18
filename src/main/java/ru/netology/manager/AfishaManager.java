@@ -8,8 +8,15 @@ import ru.netology.repository.MovieRepository;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AfishaManager {
-    private MovieRepository repository = new MovieRepository();
-    private int moviesToReturn = 10;
+    private MovieRepository repository;
+    private int moviesToReturnDefault = 10;
+    private int moviesToReturn;
+
+
+    public AfishaManager(MovieRepository repository, int moviesToReturn) {
+        this.repository = repository;
+        this.moviesToReturn = moviesToReturn;
+    }
 
     public AfishaManager(MovieRepository repository) {
         this.repository = repository;
@@ -21,10 +28,17 @@ public class AfishaManager {
 
     public MovieItem[] getMovies() {
         MovieItem[] moviesFromRepo = repository.findAll();
+        int arrayLength = moviesFromRepo.length;
 
-        int arrayLength = moviesToReturn;
-        if (moviesFromRepo.length < arrayLength) {
-            arrayLength = moviesFromRepo.length;
+        if (moviesToReturn <= 0) {
+            if (moviesToReturnDefault < moviesFromRepo.length) {
+                arrayLength = moviesToReturnDefault;
+            }
+        } else {
+            if (arrayLength < moviesFromRepo.length) {
+                arrayLength = moviesToReturn;
+
+            }
         }
         MovieItem[] result = new MovieItem[arrayLength];
 
