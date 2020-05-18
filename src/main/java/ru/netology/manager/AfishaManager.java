@@ -8,7 +8,8 @@ import ru.netology.domain.MovieItem;
 @AllArgsConstructor
 public class AfishaManager {
     private MovieItem[] movies = new MovieItem[0];
-    private int moviesToReturn = 10;
+    private int moviesToReturn;
+    private int moviesToReturnDefault = 10;
 
     public AfishaManager(int moviesToReturn) {
         this.moviesToReturn = moviesToReturn;
@@ -26,10 +27,19 @@ public class AfishaManager {
     }
 
     public MovieItem[] getMovies() {
-        int arrayLength = moviesToReturn;
-        if (movies.length < arrayLength) {
-            arrayLength = movies.length;
+        int arrayLength = movies.length;
+
+        if (moviesToReturn <= 0) {
+            if (moviesToReturnDefault < movies.length) {
+                arrayLength = moviesToReturnDefault;
+            }
+        } else {
+            if (arrayLength < movies.length) {
+                arrayLength = moviesToReturn;
+
+            }
         }
+
         MovieItem[] result = new MovieItem[arrayLength];
 
         for (int i = 0; i < arrayLength; i++) {
