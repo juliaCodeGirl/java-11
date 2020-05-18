@@ -109,22 +109,15 @@ class MovieRepositoryTest {
         assertArrayEquals(expected, repository.findAll());
     }
 
+    @Test
+    void shouldNotRemoveIfNotExistingId() {
+        repository.save(first);
+        repository.save(second);
+        repository.save(third);
+        repository.save(fourth);
+        repository.save(fifth);
 
-    //тест для удаления по несуществующему id (выдает java.lang.ArrayIndexOutOfBoundsException: Index 6 out of bounds for length 6)
-
-//    @Test
-//    void shouldNotRemoveIfNotExistingId() {
-//        MovieItem[] expected = new MovieItem[]{first, second, third, fourth, fifth};
-//
-//        repository.save(first);
-//        repository.save(second);
-//        repository.save(third);
-//        repository.save(fourth);
-//        repository.save(fifth);
-
-//        repository.removeById(8);
-//
-//        assertArrayEquals(expected, repository.findAll());
-//    }
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> repository.removeById(8));
+    }
 
 }
